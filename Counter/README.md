@@ -16,7 +16,7 @@ increase, decrease, and reset a displayed number.
 - CSS3
 - JavaScript
 
-## What I Learned
+## Concepts Used
 
 - DOM manipulation
 - Event handling
