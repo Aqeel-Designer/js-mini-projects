@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+        }
+
+        .counter-container {
+            width: 400px;
+            padding: 40px;
+
+            background: white;
+            border-radius: 20px;
+
+            text-align: center;
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .title {
+            font-size: 28px;
+            color: #1f2937;
+            margin-bottom: 25px;
+        }
+
+        #countlabel {
+            display: block;
+
+            font-size: 100px;
+            font-weight: bold;
+            color: #2563eb;
+
+            margin-bottom: 30px;
+        }
+
+        .btncontainer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .buttons {
+            padding: 12px 18px;
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        /* Decrease button */
+
+        #decreasebtn {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        #decreasebtn:hover {
+            background: #dc2626;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Reset button */
+
+        #resetbtn {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        #resetbtn:hover {
+            background: #374151;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Increase button */
+
+        #increasebtn {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        #increasebtn:hover {
+            background: #16a34a;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .buttons:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="counter-container">
+
+        <h1 class="title">Counter</h1>
+
+        <label for="counter" id="countlabel">0</label>
+
+        <div class="btncontainer">
+            <button id="decreasebtn" class="buttons">
+                − Decrease
+            </button>
+
+            <button id="resetbtn" class="buttons">
+                Reset
+            </button>
+
+            <button id="increasebtn" class="buttons">
+                + Increase
+            </button>
+        </div>
+
+    </div>
+
+
+    <script>
+        const decreasebtn = document.getElementById("decreasebtn");
+        const increasebtn = document.getElementById("increasebtn");
+        const resetbtn = document.getElementById("resetbtn");
+        const countlabel = document.getElementById("countlabel");
+
+        let count = 0;
+
+        decreasebtn.onclick = function () {
+            count--;
+            countlabel.textContent = count;
+        }
+
+        increasebtn.onclick = function () {
+            count++;
+            countlabel.textContent = count;
+        }
+
+        resetbtn.onclick = function () {
+            count = 0;
+            countlabel.textContent = count;
+        }
+    </script>
+
+</body>
+</html>
