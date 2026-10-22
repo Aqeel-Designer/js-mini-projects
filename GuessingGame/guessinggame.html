@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        * {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #eaf6ff;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #263238;
+}
+
+#container {
+    width: 650px;
+    min-height: 400px;
+
+    padding: 50px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border: 1px solid #cfe5f5;
+    border-radius: 20px;
+
+    box-shadow: 0 15px 40px rgba(60, 130, 180, 0.15);
+
+    text-align: center;
+}
+
+h1 {
+    margin: 0 0 30px;
+
+    font-size: 32px;
+    line-height: 1.3;
+
+    color: #245b7a;
+}
+
+#guess {
+    width: 180px;
+
+    padding: 14px;
+
+    border: 2px solid #b9d9eb;
+    border-radius: 10px;
+
+    background: #f7fcff;
+    color: #263238;
+
+    font-size: 20px;
+    text-align: center;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+#guess:focus {
+    border-color: #4aa3df;
+    box-shadow: 0 0 0 3px rgba(74, 163, 223, 0.15);
+}
+
+button {
+    margin-top: 20px;
+
+    padding: 13px 32px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #4aa3df;
+    color: white;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+button:hover {
+    background: #328dcc;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#result {
+    width: 100%;
+    min-height: 70px;
+
+    margin-top: 30px;
+    padding: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f1f9fe;
+
+    border: 1px solid #d5ebf7;
+    border-radius: 10px;
+
+    color: #245b7a;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    line-height: 1.5;
+}
+
+/* Reload button */
+button:last-child {
+    margin-top: 25px;
+
+    background: #e8f1f6;
+    color: #3d6478;
+
+    border: 1px solid #c8dce7;
+}
+
+button:last-child:hover {
+    background: #d9eaf3;
+}
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+
+        <h1>Enter a number between 1 and 100</h1>
+
+        <input type="number" id="guess" min="1" max="100">
+
+        <button type="button" onclick="checkGuess()">
+            Guess
+        </button>
+
+        <div id="result">Guess The Number</div>
+
+        <button type="button" onclick="window.location.reload();">
+            Reload Page
+        </button>
+
+    </div>
+
+    <script>
+
+        const minNumber = 1;
+        const maxNumber = 100;
+
+        const answer = Math.floor(
+            Math.random() * (maxNumber - minNumber + 1) + minNumber
+        );
+
+        let attempts = 0;
+
+        const guessInput = document.getElementById("guess");
+        const result = document.getElementById("result");
+
+
+        function checkGuess() {
+
+            const guess = Number(guessInput.value);
+
+            if (guessInput.value === "") {
+                result.textContent = "Please enter a number";
+            }
+
+            else if (guess < minNumber || guess > maxNumber) {
+                result.textContent = "Please enter a number between 1 and 100";
+            }
+
+            else {
+                attempts++;
+
+                if (guess > answer) {
+                    result.textContent = "Your guess is too high, try lower";
+                }
+
+                else if (guess < answer) {
+                    result.textContent = "Your guess is too low, try higher";
+                }
+
+                else {
+                    result.textContent =
+                        `Congratulations! Your guess ${answer} is correct. 
+                        You took ${attempts} attempts.`;
+                }
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
