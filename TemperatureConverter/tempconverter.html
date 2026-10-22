@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Arial, sans-serif;
+
+    background-color: #e8eef5;
+    color: #222;
+}
+
+form {
+    width: 400px;
+    padding: 35px;
+
+    background-color: white;
+
+    border: 1px solid #d5dce5;
+    border-radius: 15px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+    margin-top: 0;
+    margin-bottom: 30px;
+
+    text-align: center;
+
+    font-size: 32px;
+    color: #2c3e50;
+}
+
+/* Temperature input */
+
+#textbox {
+    width: 100%;
+    padding: 14px;
+
+    margin-bottom: 25px;
+
+    box-sizing: border-box;
+
+    border: 2px solid #ccd5df;
+    border-radius: 8px;
+
+    background-color: #f8fafc;
+
+    font-size: 20px;
+    text-align: center;
+
+    outline: none;
+}
+
+#textbox:focus {
+    border-color: #4a90e2;
+    background-color: white;
+}
+
+
+/* Radio buttons */
+
+.option {
+    display: flex;
+    align-items: center;
+
+    padding: 12px 15px;
+    margin-bottom: 12px;
+
+    border: 1px solid #d5dce5;
+    border-radius: 8px;
+
+    background-color: #f8fafc;
+
+    font-size: 17px;
+}
+
+.option:hover {
+    background-color: #eef4fa;
+}
+
+.option input {
+    width: 18px;
+    height: 18px;
+
+    margin-right: 12px;
+
+    cursor: pointer;
+}
+
+.option label {
+    cursor: pointer;
+
+    font-size: 17px;
+    font-weight: 500;
+
+    color: #34495e;
+}
+
+
+/* Submit button */
+
+#button {
+    width: 100%;
+
+    padding: 14px;
+    margin-top: 10px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #4a90e2;
+    color: white;
+
+    font-size: 18px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+#button:hover {
+    background-color: #357abd;
+}
+
+#button:active {
+    background-color: #2868a8;
+}
+
+
+/* Result */
+
+#result {
+    min-height: 30px;
+
+    margin-top: 25px;
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background-color: #f1f5f9;
+
+    color: #2c3e50;
+
+    font-size: 24px;
+    font-weight: bold;
+
+    text-align: center;
+    display: none;
+}
+</style>
+<body>
+    <form>
+        <h1>Temperature Converter</h1>
+        <input type="number" id="textbox" value="0"><br>
+
+<div class="option">
+    <input type="radio" id="toFahrenheit" name="unit">
+    <label for="toFahrenheit">Celsius → Fahrenheit</label>
+</div>
+
+<div class="option">
+    <input type="radio" id="toCelcius" name="unit">
+    <label for="toCelcius">Fahrenheit → Celsius</label>
+</div>
+        <button type="button" id="button">Submit</button>
+        <p id="result"></p>
+    </form>
+
+
+
+    <script src="/Day3/tempconverter.js">
+
+    </script>
+</body>
+
+</html>

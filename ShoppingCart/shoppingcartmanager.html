@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+/* =========================
+   General
+========================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* =========================
+   Main Container
+========================= */
+
+#container {
+    width: 450px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/* =========================
+   Headings
+========================= */
+
+h1 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
+    text-align: center;
+}
+
+
+/* =========================
+   Inputs
+========================= */
+
+input {
+    width: 100%;
+    padding: 12px;
+
+    margin-bottom: 10px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+input:focus {
+    border-color: #333;
+}
+
+
+/* =========================
+   Buttons
+========================= */
+
+button {
+    width: 100%;
+
+    padding: 12px;
+
+    margin-bottom: 30px;
+
+    border: none;
+    border-radius: 5px;
+
+    background-color: #333;
+    color: white;
+
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+
+/* =========================
+   Result
+========================= */
+
+#result {
+    padding: 15px;
+
+    background-color: #f7f7f7;
+
+    border-radius: 5px;
+
+    color: #333;
+    line-height: 1.6;
+
+    min-height: 50px;
+    text-align: center;
+      white-space: pre-line;
+
+}
+
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+
+        <h1>Add Items</h1>
+
+        <input type="text" id="addProduct" placeholder="Product" oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')">
+
+        <input type="number" id="addPrice" placeholder="Price">
+
+        <button onclick="addProductbtn()">Add</button>
+
+
+        <h1>Remove Items</h1>
+
+        <input type="text" id="removeProduct" placeholder="Product">
+
+        <button onclick="removeProductbtn()">Remove</button>
+
+
+        <div id="result">Your cart is empty</div>
+
+    </div>
+
+
+    <script>
+
+        const addProduct = document.getElementById("addProduct");
+        const addPrice = document.getElementById("addPrice");
+        const removeProduct = document.getElementById("removeProduct");
+        const result = document.getElementById("result");
+
+        let cart = [];
+
+
+        function addProductbtn(){
+
+            const productName = addProduct.value;
+
+            const productPrice = Number(addPrice.value);
+
+
+            const product = {
+                name: productName.charAt(0).toUpperCase() + productName.slice(1),
+                price: productPrice
+            };
+
+
+            cart.push(product);
+
+            showCart();
+        }
+
+
+        function removeProductbtn(){
+
+            const productName = removeProduct.value;
+
+            const index = cart.findIndex(item => item.name === productName.charAt(0).toUpperCase() + productName.slice(1));
+
+
+            if(index != -1){
+
+                cart.splice(index, 1);
+
+                showCart();
+
+            } else {
+
+                window.alert("The product is not in the cart");
+
+            }
+
+        }
+
+
+        function calculateTotal(){
+
+            let total = cart.reduce((number, currentProduct) => {
+
+                return number + currentProduct.price;
+
+            }, 0);
+
+            return total.toFixed(2);
+        }
+
+
+        function showCart(){
+
+            if(cart.length === 0){
+
+                result.textContent = "Your cart is empty";
+
+                return;
+            }
+
+
+            result.textContent =
+                `Your cart has the following items:
+                ${cart.map(item => item.name).join(", ")}
+                 Total: $${calculateTotal()}`;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
