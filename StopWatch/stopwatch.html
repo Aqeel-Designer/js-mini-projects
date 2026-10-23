@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Watch</title>
+    <style>
+/* =========================
+   Reset
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   Body
+========================= */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family:'Times New Roman', Times, serif;
+
+    background: #14416e;
+}
+
+
+/* =========================
+   Heading
+========================= */
+
+h1 {
+    margin-bottom: 30px;
+
+    font-size: 4.5rem;
+    font-weight: 700;
+
+    color: #eff1f4;
+}
+
+
+/* =========================
+   Stopwatch Container
+========================= */
+
+#container {
+    width: 900px;
+
+    padding: 45px 50px;
+
+    background: #0f172aa0;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 40px rgba(15, 23, 42, 0.2);
+
+    text-align: center;
+}
+
+
+/* =========================
+   Stopwatch Display
+========================= */
+
+#display {
+    width: 100%;
+
+    padding: 25px 15px;
+
+    margin-bottom: 35px;
+
+
+
+    border-radius: 14px;
+
+    color: #38bdf8;
+
+    font-family: monospace;
+    font-size: 6rem;
+    font-weight: bold;
+
+    letter-spacing: 5px;
+
+    box-shadow:
+        inset 0 0 20px rgba(56, 189, 248, 0.08);
+
+    text-shadow:
+        0 0 12px rgba(56, 189, 248, 0.4);
+}
+
+
+/* =========================
+   Buttons
+========================= */
+
+#buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+}
+
+
+button {
+    width: 130px;
+
+    padding: 13px 20px;
+
+    border: none;
+    border-radius: 9px;
+
+    color: white;
+
+    font-size: 1rem;
+    font-weight: 600;
+
+    cursor: pointer;
+    margin:5px;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+/* =========================
+   Start Button
+========================= */
+
+#startBtn {
+    background: #22c55e;
+
+    box-shadow:
+        0 5px 15px rgba(34, 197, 94, 0.25);
+}
+
+#startBtn:hover {
+    filter: brightness(1.1);
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(34, 197, 94, 0.4);
+}
+
+
+/* =========================
+   Stop Button
+========================= */
+
+#stopBtn {
+    background: #ef4444;
+
+    box-shadow:
+        0 5px 15px rgba(239, 68, 68, 0.25);
+}
+
+#stopBtn:hover {
+    filter: brightness(1.1);
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(239, 68, 68, 0.4);
+}
+
+
+/* =========================
+   Reset Button
+========================= */
+
+#resetBtn {
+    background: #3b82f6;
+
+    box-shadow:
+        0 5px 15px rgba(59, 130, 246, 0.25);
+}
+
+#resetBtn:hover {
+    filter: brightness(1.1);
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 8px 20px rgba(59, 130, 246, 0.4);
+}
+
+
+/* =========================
+   Button Click Effect
+========================= */
+
+button:active {
+    transform: translateY(0);
+}
+
+    </style>
+</head>
+<body>
+    <h1>StopWatch ⏱️</h1>
+    <div id="container">
+        <div id="display">
+            00:00:00:00
+        </div>
+        <div>
+            <button id="startBtn" onclick="start()">Start</button>
+            <button id="stopBtn" onclick="stop()">Stop</button>
+            <button id="resetBtn" onclick="reset()">Reset</button>
+        </div>
+    </div>
+    
+<script>
+const display = document.getElementById("display");
+let timer = null;
+let startTime = 0;
+let elapsedTime = 0;
+let isRunning = false;
+
+function start(){
+    if(!isRunning){
+        startTime = new Date() - elapsedTime;
+        timer = setInterval(update,10);
+        isRunning = true;
+    }
+}
+function stop(){
+    if(isRunning){
+        clearInterval(timer);
+        elapsedTime = Date.now()-startTime;
+        isRunning = false;
+    }
+}
+function reset(){
+    clearInterval(timer);
+    startTime = 0;
+    elapsedTime = 0;
+    isRunning = false;
+    display.textContent = "00:00:00:00";
+}
+function update(){
+    const currentTime = Date.now();
+    elapsedTime = currentTime - startTime;
+
+    let hours = Math.floor(elapsedTime / (1000*60*60));
+    hours = String(hours).padStart(2,"0");
+    let minutes = Math.floor(elapsedTime/(1000*60)%60);
+    minutes = String(minutes).padStart(2,"0");
+    let seconds = Math.floor(elapsedTime/1000%60);
+    seconds = String(seconds).padStart(2,"0");
+    let miliseconds = Math.floor(elapsedTime%1000/10);
+    miliseconds = String(miliseconds).padStart(2,"0");
+
+    display.textContent = `${hours}:${minutes}:${seconds}:${miliseconds}`;
+}
+</script>    
+</body>
+</html>
