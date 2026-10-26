@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API</title>
+    <style>
+/* =========================
+   Reset
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   Body
+========================= */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px;
+
+    font-family: Arial, sans-serif;
+
+    background: #0f172a;
+    color: #f8fafc;
+}
+
+
+/* =========================
+   Main Container
+========================= */
+
+#container {
+    width: 600px;
+    min-height: 300px;
+
+    padding: 45px;
+
+    border: 2px solid #334155;
+    border-radius: 25px;
+
+    background: #111827;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+
+    text-align: center;
+}
+
+
+/* =========================
+   Main Heading
+========================= */
+
+#container h1 {
+    margin-bottom: 35px;
+
+    font-size: 3rem;
+    font-weight: 800;
+
+    color: #f8fafc;
+}
+
+
+/* =========================
+   Search Area
+========================= */
+
+#searchArea {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+
+/* =========================
+   Input
+========================= */
+
+#pokemonname {
+    width: 100%;
+
+    padding: 16px 20px;
+
+    border: 2px solid #334155;
+    border-radius: 12px;
+
+    background: #1e293b;
+    color: white;
+
+    font-size: 1.3rem;
+
+    outline: none;
+
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+#pokemonname::placeholder {
+    color: #94a3b8;
+}
+
+
+#pokemonname:focus {
+    border-color: #38bdf8;
+
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+}
+
+
+/* =========================
+   Button
+========================= */
+
+#searchArea button {
+    padding: 15px 30px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #38bdf8;
+    color: #0f172a;
+
+    font-size: 1.2rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+#searchArea button:hover {
+    background: #7dd3fc;
+
+    transform: translateY(-3px);
+
+    box-shadow: 0 8px 20px rgba(56, 189, 248, 0.3);
+}
+
+
+#searchArea button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   Pokemon Result Area
+========================= */
+
+#pokemonResult {
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding-top: 10px;
+
+
+}
+
+
+/* =========================
+   Pokemon Name
+========================= */
+
+#pokemondisplayname {
+    margin-bottom: 10px;
+
+    font-size: 2rem;
+
+    text-transform: capitalize;
+
+    color: #f8fafc;
+}
+
+
+/* =========================
+   Pokemon Type
+========================= */
+
+#pokemontype {
+    margin-bottom: 20px;
+
+    font-size: 1.5rem;
+
+    text-transform: capitalize;
+
+    color: #94a3b8;
+}
+
+
+/* =========================
+   Pokemon Image
+========================= */
+
+#pokemonimage {
+    display: none;
+
+    width: 300px;
+    height: 300px;
+
+    margin: 20px auto 0;
+
+    padding: 15px;
+
+    object-fit: contain;
+
+    border-radius: 20px;
+
+    background: #1e293b;
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================
+   Error Message
+========================= */
+
+#errormessage {
+    display: none;
+
+    margin-top: 30px;
+
+    font-size: 1.8rem;
+
+    color: #ef4444;
+}
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <h1>Pokemon Search</h1>
+        <div id="searchArea">
+            <input type="text" id="pokemonname" placeholder="Enter Pokemon name">
+            <button onclick="fetchDatahtml()">
+                Fetch Pokemon
+            </button>
+        </div>
+        <div id="pokemonResult">
+            <h2 id="pokemondisplayname"></h2>
+            <h2 id="pokemontype"></h2>
+            <img src="" id="pokemonimage" alt="Pokemon Image">
+            <h2 id="errormessage"></h2>
+        </div>
+    </div>
+<script src="/PokemonSearchApp/pokemonsearch.js"></script>
+
+</body>
+
+</html>
