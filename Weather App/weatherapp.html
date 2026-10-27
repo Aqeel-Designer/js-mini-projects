@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+/* =========================
+   Reset
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   Body
+========================= */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+
+    font-family: Arial, sans-serif;
+
+    color: white;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   Weather Background Video
+========================= */
+
+#weatherBackground {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: -2;
+}
+
+
+/* =========================
+   Background Overlay
+========================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0, 0, 0, 0.30);
+
+    z-index: -1;
+}
+
+
+/* =========================
+   Weather Form
+========================= */
+
+.weatherForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    gap: 30px;
+
+    width: 500px;
+
+    margin-bottom: 30px;
+
+    position: relative;
+    z-index: 1;
+}
+
+
+/* =========================
+   City Input
+========================= */
+
+.cityInput {
+    width: 100%;
+
+    padding: 18px 22px;
+
+    border: 2px solid rgba(255, 255, 255, 0.35);
+
+    border-radius: 15px;
+
+    outline: none;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    color: white;
+        text-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.3);
+
+    font-size: 1.3rem;
+
+    text-align: center;
+
+    backdrop-filter: blur(10px);
+
+    transition: 0.3s ease;
+}
+
+
+.cityInput::placeholder {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+
+.cityInput:focus {
+    border-color: rgba(255, 255, 255, 0.8);
+
+    background: rgba(255, 255, 255, 0.22);
+
+    box-shadow:
+        0 0 25px rgba(255, 255, 255, 0.2);
+}
+
+
+/* =========================
+   Get Weather Button
+========================= */
+
+.weatherForm button {
+    padding: 15px 35px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.85);
+
+    color: #1e293b;
+
+    font-size: 1.2rem;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.25);
+
+    transition: all 0.25s ease;
+}
+
+
+.weatherForm button:hover {
+    background: white;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.35);
+}
+
+
+.weatherForm button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================
+   Weather Card
+========================= */
+
+.card {
+    width: 500px;
+
+    min-height: 500px;
+
+    padding: 35px;
+
+    /* JavaScript changes this to flex */
+    display: none;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    /* More transparent so video is visible */
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.35);
+
+    position: relative;
+
+    z-index: 1;
+}
+
+
+/* =========================
+   City Name
+========================= */
+
+.CityDisplay {
+    font-size: 3.5rem;
+
+    font-weight: 800;
+
+    text-transform: capitalize;
+
+    margin-bottom: 10px;
+
+    text-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================
+   Temperature
+========================= */
+
+.tempDisplay {
+    font-size: 4rem;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+
+    color: #fff7d6;
+
+    text-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================
+   Humidity
+========================= */
+
+.humidityDisplay {
+    font-size: 1.4rem;
+
+    margin-bottom: 10px;
+
+    color: white;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================
+   Weather Description
+========================= */
+
+.descDisplay {
+    font-size: 1.5rem;
+
+    text-transform: capitalize;
+
+    color: white;
+
+    margin-bottom: 10px;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+/* =========================
+   Weather Emoji
+========================= */
+
+.weatherEmoji {
+    font-size: 8rem;
+
+    line-height: 1;
+
+    margin-top: 20px;
+
+    filter:
+        drop-shadow(0 10px 10px rgba(0, 0, 0, 0.35));
+
+    animation:
+        floatEmoji 3s ease-in-out infinite;
+}
+
+
+/* =========================
+   Emoji Animation
+========================= */
+
+@keyframes floatEmoji {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================
+   Error Message
+========================= */
+
+.errorDisplay {
+    font-size: 1.8rem;
+
+    font-weight: bold;
+
+    color: #ffe4e6;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    background: rgba(220, 38, 38, 0.25);
+
+    border: 1px solid rgba(255, 150, 150, 0.5);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.2);
+
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.4);
+}
+    </style>
+</head>
+<body>
+
+    <video id="weatherBackground"
+           autoplay
+           muted
+           loop
+           playsinline>
+    </video>
+
+    <form class="weatherForm">
+        <h1>Weather App ☁️</h1>
+        <input type="text"
+               class="cityInput"
+               placeholder="Enter your City">
+
+        <button type="submit">
+            Get Weather
+        </button>
+    </form>
+
+    <div class="card" style="display: none;">
+    </div>
+
+    <script src="/Day8/weatherapp.js"></script>
+
+</body>
+</html>
