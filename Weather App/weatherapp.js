@@ -2,7 +2,7 @@ const weatherForm = document.querySelector(".weatherForm");      //we are using 
 const cityInput = document.querySelector(".cityInput");
 const card = document.querySelector(".card");
 weatherBackground.src = "/Day8/videos/default2.mp4";
-const apiKey = "3093e5c7e45e6a4607e251a45a63c0f9";
+const apiKey = "Your-API-KEY_GOES-HERE";
 
 weatherForm.addEventListener("submit", async event =>{            //the event is submit because we used form in html , submit gives form the data , we made this function async becuase we have to use await when we call the get weatherdata function
     event.preventDefault();    //forms have a default method to reload when submitted, so we use this to prevent that
